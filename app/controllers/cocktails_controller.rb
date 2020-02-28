@@ -6,6 +6,7 @@ before_action :set_cocktail, only: [:show]
   end
 
   def show
+    @dose = Dose.new
   end
 
   def new
