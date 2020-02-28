@@ -9,6 +9,8 @@ Dose.destroy_all
 puts 'Creating new database...'
 
 URL = "https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list"
+images = ["https://images.unsplash.com/photo-1530034424313-9be028eeae5a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80",
+"https://images.unsplash.com/photo-1539788292313-547a2c372229?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80", "https://images.unsplash.com/photo-1541020230467-e33e4f96f7fc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80", "https://images.unsplash.com/photo-1541705690759-58b15944552f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80", "https://images.unsplash.com/photo-1566805972780-0f6fbefd137b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80", "https://images.unsplash.com/photo-1506086981951-28ca31bf51dd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80"]
 
 data = JSON.parse(open(URL).read)
 ingredients = []
@@ -16,8 +18,10 @@ data['drinks'].each do |item|
   ingredients << item['strIngredient1']
 end
 
-15.times do
+6.times do
   cocktail = Cocktail.new(name: Faker::Dessert.unique.flavor)
+  cocktail.img = images.sample
+  # cocktail.img = "http://loremflickr.com/500/280/#{cocktail.name}"
   cocktail.save
   3.times do
     ingredient = Ingredient.new(name: ingredients.sample)
