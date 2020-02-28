@@ -8,6 +8,13 @@
 <% end %>
 
 <%= simple_form_for([@cocktail, @dose]) do |f| %>
+<% if @dose.errors.any? %>
+    <div>
+      <% @dose.errors.full_messages.each do |message| %>
+        <p style="color:red;"><%= message.lstrip %></p>
+      <% end %>
+    </div>
+  <% end %>
   <%= f.input :description %>
   <%= f.association :ingredient %>
   <%= f.button :submit %>
